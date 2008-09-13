@@ -211,6 +211,16 @@ oil_avg2_16xn_u8 (uint8_t * d_16xn, int ds1, const uint8_t * s1_16xn, int ss1, c
   ((void (*)(uint8_t * d_16xn, int ds1, const uint8_t * s1_16xn, int ss1, const uint8_t * s2_16xn, int ss2, int n))(_oil_function_class_avg2_16xn_u8.func))(d_16xn, ds1, s1_16xn, ss1, s2_16xn, ss2, n);
 }
 
+#undef oil_avg2_32xn_u8
+void
+oil_avg2_32xn_u8 (uint8_t * d_32xn, int ds1, const uint8_t * s1_32xn, int ss1, const uint8_t * s2_32xn, int ss2, int n)
+{
+  if (_oil_function_class_avg2_32xn_u8.func == NULL) {
+    oil_class_optimize (&_oil_function_class_avg2_32xn_u8);
+  }
+  ((void (*)(uint8_t * d_32xn, int ds1, const uint8_t * s1_32xn, int ss1, const uint8_t * s2_32xn, int ss2, int n))(_oil_function_class_avg2_32xn_u8.func))(d_32xn, ds1, s1_32xn, ss1, s2_32xn, ss2, n);
+}
+
 #undef oil_avg2_8xn_u8
 void
 oil_avg2_8xn_u8 (uint8_t * d_8xn, int ds1, const uint8_t * s1_8xn, int ss1, const uint8_t * s2_8xn, int ss2, int n)
@@ -959,6 +969,16 @@ oil_combine4_16xn_u8 (uint8_t * d_16xn, int ds1, const uint8_t * s1_16xn, int ss
     oil_class_optimize (&_oil_function_class_combine4_16xn_u8);
   }
   ((void (*)(uint8_t * d_16xn, int ds1, const uint8_t * s1_16xn, int ss1, const uint8_t * s2_16xn, int ss2, const uint8_t * s3_16xn, int ss3, const uint8_t * s4_16xn, int ss4, const int16_t * s5_6, int n))(_oil_function_class_combine4_16xn_u8.func))(d_16xn, ds1, s1_16xn, ss1, s2_16xn, ss2, s3_16xn, ss3, s4_16xn, ss4, s5_6, n);
+}
+
+#undef oil_combine4_32xn_u8
+void
+oil_combine4_32xn_u8 (uint8_t * d_32xn, int ds1, const uint8_t * s1_16xn, int ss1, const uint8_t * s2_32xn, int ss2, const uint8_t * s3_32xn, int ss3, const uint8_t * s4_32xn, int ss4, const int16_t * s5_6, int n)
+{
+  if (_oil_function_class_combine4_32xn_u8.func == NULL) {
+    oil_class_optimize (&_oil_function_class_combine4_32xn_u8);
+  }
+  ((void (*)(uint8_t * d_32xn, int ds1, const uint8_t * s1_16xn, int ss1, const uint8_t * s2_32xn, int ss2, const uint8_t * s3_32xn, int ss3, const uint8_t * s4_32xn, int ss4, const int16_t * s5_6, int n))(_oil_function_class_combine4_32xn_u8.func))(d_32xn, ds1, s1_16xn, ss1, s2_32xn, ss2, s3_32xn, ss3, s4_32xn, ss4, s5_6, n);
 }
 
 #undef oil_combine4_8xn_u8

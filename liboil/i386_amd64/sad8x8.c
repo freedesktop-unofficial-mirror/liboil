@@ -617,6 +617,47 @@ combine4_16xn_u8_mmx (uint8_t *d, int ds1,
 OIL_DEFINE_IMPL_FULL (combine4_16xn_u8_mmx, combine4_16xn_u8, OIL_IMPL_FLAG_MMX|OIL_IMPL_FLAG_MMXEXT);
 
 void
+combine4_32xn_u8_mmx (uint8_t *d, int ds1,
+    uint8_t *s1, int ss1,
+    uint8_t *s2, int ss2,
+    uint8_t *s3, int ss3,
+    uint8_t *s4, int ss4,
+    int16_t *s5_6, int n)
+{
+  int j;
+
+  asm volatile ("\n"
+      "  pxor %%mm7, %%mm7\n"
+      "  movq 0(%0), %%mm6\n"
+      "  movd 8(%0), %%mm4\n"
+      "  pshufw $0x00, %%mm4, %%mm4\n"
+      ::"r" (s5_6));
+
+  for(j=0;j<n;j++){
+    asm volatile ("\n"
+        DO_4(0)
+        DO_4(4)
+        DO_4(8)
+        DO_4(12)
+        DO_4(16)
+        DO_4(20)
+        DO_4(24)
+        DO_4(28)
+
+        :
+        : "r" (d), "r" (s1), "r" (s2), "r" (s3), "r" (s4));
+
+    s1 += ss1;
+    s2 += ss2;
+    s3 += ss3;
+    s4 += ss4;
+    d += ds1;
+  }
+  asm volatile ("emms");
+}
+OIL_DEFINE_IMPL_FULL (combine4_32xn_u8_mmx, combine4_32xn_u8, OIL_IMPL_FLAG_MMX|OIL_IMPL_FLAG_MMXEXT);
+
+void
 combine2_12xn_u8_mmx (uint8_t *d, int ds1,
     uint8_t *s1, int ss1,
     uint8_t *s2, int ss2,
@@ -818,4 +859,34 @@ avg2_16xn_u8_mmx (uint8_t *d, int ds1, uint8_t *s1, int ss1,
   asm volatile ("emms");
 }
 OIL_DEFINE_IMPL_FULL (avg2_16xn_u8_mmx, avg2_16xn_u8, OIL_IMPL_FLAG_MMX|OIL_IMPL_FLAG_MMXEXT);
+
+void
+avg2_32xn_u8_mmx (uint8_t *d, int ds1, uint8_t *s1, int ss1,
+    uint8_t *s2, int ss2, int n)
+{
+  int j;
+  for(j=0;j<n;j++){
+    asm volatile ("\n"
+        "  movq 0(%[s1]), %%mm0\n"
+        "  pavgb 0(%[s2]), %%mm0\n"
+        "  movq %%mm0, 0(%[d])\n"
+        "  movq 8(%[s1]), %%mm0\n"
+        "  pavgb 8(%[s2]), %%mm0\n"
+        "  movq %%mm0, 8(%[d])\n"
+        "  movq 16(%[s1]), %%mm0\n"
+        "  pavgb 16(%[s2]), %%mm0\n"
+        "  movq %%mm0, 16(%[d])\n"
+        "  movq 24(%[s1]), %%mm0\n"
+        "  pavgb 24(%[s2]), %%mm0\n"
+        "  movq %%mm0, 24(%[d])\n"
+        :
+        : [d] "r" (d), [s1] "r" (s1), [s2] "r" (s2));
+
+    s1 += ss1;
+    s2 += ss2;
+    d += ds1;
+  }
+  asm volatile ("emms");
+}
+OIL_DEFINE_IMPL_FULL (avg2_32xn_u8_mmx, avg2_32xn_u8, OIL_IMPL_FLAG_MMX|OIL_IMPL_FLAG_MMXEXT);
 
