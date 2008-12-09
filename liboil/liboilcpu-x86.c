@@ -302,7 +302,17 @@ oil_cpu_detect_getisax (void)
 static void
 oil_cpu_detect_kernel_support (void)
 {
-#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__APPLE__)
+#if defined(__APPLE__)
+  int ret, enabled;
+  size_t len;
+
+  len = sizeof(enabled);
+  ret = sysctlbyname("hw.optional.sse", &enabled, &len, NULL, 0);
+  if (ret || !enabled) {
+    oil_cpu_flags &= ~(OIL_IMPL_FLAG_SSE | OIL_IMPL_FLAG_SSE2 |
+		       OIL_IMPL_FLAG_MMXEXT | OIL_IMPL_FLAG_SSE3);
+  }
+#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
   int ret, enabled;
   size_t len;
 
