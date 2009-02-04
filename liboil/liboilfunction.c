@@ -367,6 +367,17 @@ oil_class_optimize (OilFunctionClass * klass)
     OIL_ERROR ("class %s has no implmentations", klass->name);
     return;
   }
+  
+  if (klass->first_impl->next == NULL) {
+    if (!oil_impl_is_runnable (klass->first_impl)) {
+      OIL_ERROR ("class %s has no runable implmentations", klass->name);
+      return;
+    }
+    OIL_DEBUG ("class %s has only one implementation %s", klass->name, klass->first_impl->name);
+    klass->chosen_impl = klass->first_impl;
+    klass->func = klass->first_impl->func;
+    return;
+  }
 
   test = oil_test_new (klass);
   if (test == NULL) {
