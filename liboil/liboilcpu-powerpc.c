@@ -59,6 +59,11 @@
 #include <sys/sysctl.h>
 #endif
 
+#if defined(__OpenBSD__)
+#include <sys/param.h>
+#include <sys/sysctl.h>
+#include <machine/cpu.h>
+#endif
 
 /***** powerpc *****/
 
@@ -70,7 +75,7 @@ oil_profile_stamp_tb(void)
   return ts;
 }
 
-#if !defined(__FreeBSD__) && !defined(__FreeBSD_kernel__) && !defined(__APPLE__) && !defined(__linux__)
+#if !defined(__FreeBSD__) && !defined(__FreeBSD_kernel__) && !defined(__OpenBSD__) && !defined(__APPLE__) && !defined(__linux__)
 static void
 test_altivec (void * ignored)
 {
@@ -87,6 +92,24 @@ oil_check_altivec_sysctl_freebsd (void)
 
   len = sizeof(av);
   ret = sysctlbyname("hw.altivec", &av, &len, NULL, 0);
+  if (!ret && av) {
+    oil_cpu_flags |= OIL_IMPL_FLAG_ALTIVEC;
+  }
+}
+#endif
+
+#if defined(__OpenBSD__)
+static void
+oil_check_altivec_sysctl_openbsd (void)
+{
+  int mib[2], av, ret;
+  size_t len;
+
+  mib[0] = CTL_MACHDEP;
+  mib[1] = CPU_ALTIVEC;
+
+  len = sizeof(av);
+  ret = sysctl(mib, 2, &av, &len, NULL, 0);
   if (!ret && av) {
     oil_cpu_flags |= OIL_IMPL_FLAG_ALTIVEC;
   }
@@ -158,7 +181,7 @@ out:
 }
 #endif
 
-#if !defined(__FreeBSD__) && !defined(__FreeBSD_kernel__) && !defined(__APPLE__) && !defined(__linux__)
+#if !defined(__FreeBSD__) && !defined(__FreeBSD_kernel__) && !defined(__OpenBSD__) && !defined(__APPLE__) && !defined(__linux__)
 static void
 oil_check_altivec_fault (void)
 {
@@ -176,6 +199,8 @@ oil_cpu_detect_arch(void)
 {
 #if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
   oil_check_altivec_sysctl_freebsd();
+#elif defined(__OpenBSD__)
+  oil_check_altivec_sysctl_openbsd();
 #elif defined(__APPLE__)
   oil_check_altivec_sysctl_darwin();
 #elif defined(__linux__)
