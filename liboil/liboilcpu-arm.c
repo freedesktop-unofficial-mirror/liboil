@@ -67,10 +67,7 @@ oil_cpu_arm_getflags_cpuinfo (char *cpuinfo)
   char **f;
 
   cpuinfo_flags = get_cpuinfo_line(cpuinfo, "Features");
-  if (cpuinfo_flags == NULL) {
-    free (cpuinfo);
-    return;
-  }
+  if (cpuinfo_flags == NULL) return;
 
   flags = strsplit(cpuinfo_flags);
   for (f = flags; *f; f++) {

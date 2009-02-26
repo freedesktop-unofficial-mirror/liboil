@@ -103,6 +103,7 @@ _oil_cpu_init (void)
 {
   const char *envvar;
 
+  OIL_INFO ("checking architecture");
   oil_cpu_detect_arch();
 
   envvar = getenv ("OIL_CPU_FLAGS");
