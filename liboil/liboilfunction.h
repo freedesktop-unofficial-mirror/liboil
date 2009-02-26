@@ -154,7 +154,7 @@ typedef enum {
  */
 struct _OilFunctionClass {
   /*< private >*/
-	void *func;
+	void (*func)(void);
 	const char *name;
 	const char *desc;
 	OilTestFunction test_func;
@@ -177,7 +177,7 @@ struct _OilFunctionImpl {
   /*< private >*/
 	void *next;
 	OilFunctionClass *klass;
-	void *func;
+	void (*func)(void);
 	unsigned int flags;
 	const char *name;
         double profile_ave;
@@ -290,7 +290,7 @@ OilFunctionClass *oil_function_class_ptr_ ## klass = \
 OilFunctionImpl OIL_OPT_MANGLE(_oil_function_impl_ ## function) = { \
 	NULL, \
 	&_oil_function_class_ ## klass , \
-	(void *)function, \
+	(void (*)(void)) function,	 \
 	OIL_OPT_FLAG_MANGLE(flags), \
         #function OIL_OPT_SUFFIX \
 } \
@@ -364,4 +364,3 @@ void oil_init_no_optimize(void);
 OIL_END_DECLS
 
 #endif
-
