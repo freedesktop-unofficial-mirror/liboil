@@ -9,7 +9,7 @@ AC_DEFUN([AS_UNALIGNED_ACCESS], [
         _AS_ECHO_N([(blacklisted) ])
         as_cv_unaligned_access=no
 	;;
-      i?86*|powerpc*|m68k*|cris*)
+      i?86*|x86_64|amd64|powerpc*|m68k*|cris*)
         _AS_ECHO_N([(whitelisted) ])
         as_cv_unaligned_access=yes
 	;;
