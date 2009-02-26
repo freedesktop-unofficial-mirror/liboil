@@ -328,10 +328,8 @@ oil_cpu_detect_kernel_support (void)
    * unmasked SSE FPU exception bug.  Other than that, if /proc/cpuinfo
    * reported SSE, then it's safe.
    */
-#elif defined(__sun)
-  /* Solaris is OK */
-#elif defined(__NetBSD__)
-  /* NetBSD is OK */
+#elif defined(__sun) || defined(__NetBSD__) || defined(__OpenBSD__)
+  /* Solaris/NetBSD/OpenBSD are OK */
 #else
    
   OIL_WARNING("Operating system is not known to support SSE.  "
