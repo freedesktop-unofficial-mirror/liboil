@@ -212,7 +212,7 @@ liboilarray.c: liboiltmp1.la Makefile
 	echo '#include <liboil/liboilfunction.h>' >>liboilarray.c.tmp
 	echo >>liboilarray.c.tmp
 	grep '^_oil_function_class_' .libs/liboiltmp1.exp | \
-	  sed -e 's/ .*//' -e 's/.*/extern OilFunctionClass &;/' >>liboilarray.c.tmp
+	  sed -e 's/ DATA$$//' -e 's/ .*//' -e 's/.*/extern OilFunctionClass &;/' >>liboilarray.c.tmp
 	echo >>liboilarray.c.tmp
 	echo 'OilFunctionClass *_oil_function_class_array[] = {' >>liboilarray.c.tmp
 	grep '^_oil_function_class_' .libs/liboiltmp1.exp | \
