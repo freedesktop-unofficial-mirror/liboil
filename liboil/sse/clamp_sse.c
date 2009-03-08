@@ -32,8 +32,10 @@
 #include <emmintrin.h>
 #include <xmmintrin.h>
 
+#ifdef HAVE_I386
 /* TODO: If we have gcc 4.2 or above, do this. Otherwise, disable all SSE use */
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#endif
 
 SSE_FUNCTION static void
 clamp_u8_sse (uint8_t *dest, uint8_t *src1, int n, uint8_t *src2_1,

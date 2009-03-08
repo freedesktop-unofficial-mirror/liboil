@@ -32,7 +32,9 @@
 #include <emmintrin.h>
 #include <liboil/liboilcolorspace.h>
 
+#ifdef HAVE_I386
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#endif
 
 #define COMPOSITE_ADD(d,s) oil_clamp_255((d) + (s))
 

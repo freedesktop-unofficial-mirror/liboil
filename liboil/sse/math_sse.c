@@ -32,7 +32,9 @@
 #include <emmintrin.h>
 #include <xmmintrin.h>
 
+#ifdef HAVE_I386
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#endif
 
 SSE_FUNCTION static void
 add_f32_sse (float *dest, float *src1, float *src2, int n)

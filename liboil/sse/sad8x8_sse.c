@@ -31,7 +31,9 @@
 #include <liboil/liboilfunction.h>
 #include <emmintrin.h>
 
+#ifdef HAVE_I386
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#endif
 
 #ifdef ENABLE_BROKEN_IMPLS
 union m128_int {

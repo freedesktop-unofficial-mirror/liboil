@@ -31,7 +31,9 @@
 #include <liboil/liboilfunction.h>
 #include <emmintrin.h>
 
+#ifdef HAVE_I386
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#endif
 
 SSE_FUNCTION static void
 copy_u8_sse (uint8_t *dest, const uint8_t *src, int n)

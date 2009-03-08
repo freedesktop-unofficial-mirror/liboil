@@ -32,7 +32,9 @@
 #include <emmintrin.h>
 #include <liboil/liboilcolorspace.h>
 
+#ifdef HAVE_I386
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#endif
 
 /* non-SSE2 compositing support */
 #define COMPOSITE_OVER(d,s,m) ((d) + (s) - oil_muldiv_255((d),(m)))
