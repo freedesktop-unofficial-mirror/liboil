@@ -34,6 +34,8 @@
 
 #ifdef HAVE_I386
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#else
+#define SSE_FUNCTION
 #endif
 
 /* non-SSE2 compositing support */

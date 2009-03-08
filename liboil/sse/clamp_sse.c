@@ -35,6 +35,8 @@
 #ifdef HAVE_I386
 /* TODO: If we have gcc 4.2 or above, do this. Otherwise, disable all SSE use */
 #define SSE_FUNCTION __attribute__((force_align_arg_pointer))
+#else
+#define SSE_FUNCTION
 #endif
 
 SSE_FUNCTION static void
