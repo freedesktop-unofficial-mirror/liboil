@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#if __VFP_FP__
+#if defined(__VFP_FP__) && !defined(__SOFTFP__)
 /* 
 ** compile with -mcpu=arm1136j-s -mfpu=vfp -mfloat-abi=softfp
 **

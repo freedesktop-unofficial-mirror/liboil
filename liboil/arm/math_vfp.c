@@ -30,7 +30,7 @@
 #include <liboil/liboilclasses.h>
 #include <liboil/liboilfunction.h>
 
-#if __VFP_FP__
+#if defined(__VFP_FP__) && !defined(__SOFTFP__)
 
 extern void vfp_add_f32 (float *d, const float *s1, const float *s2, int n);
 extern void vfp_add_f64 (double *d, const double *s1, const double *s2, int n);
