@@ -73,6 +73,7 @@ mas10_u8_mmx (uint8_t *d, const uint8_t *s1_np9, const int16_t *s2_10,
 }
 OIL_DEFINE_IMPL_FULL (mas10_u8_mmx, mas10_u8_l15, OIL_IMPL_FLAG_MMX|OIL_IMPL_FLAG_MMXEXT);
 
+#if 0
 void
 mas10_u8_mmx_2 (uint8_t *d, const uint8_t *s1_np9, const int16_t *s2_10,
         const int16_t *s3_2, int n)
@@ -151,6 +152,7 @@ mas10_u8_mmx_2 (uint8_t *d, const uint8_t *s1_np9, const int16_t *s2_10,
       : "ecx");
 }
 OIL_DEFINE_IMPL_FULL (mas10_u8_mmx_2, mas10_u8_l15, OIL_IMPL_FLAG_MMX|OIL_IMPL_FLAG_MMXEXT);
+#endif
 
 void
 mas10_u8_mmx_3 (uint8_t *d, const uint8_t *s1_np9, const int16_t *s2_10,
