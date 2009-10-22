@@ -30,7 +30,8 @@ sum_s16_mmx (int16_t *d, int16_t *s, int n)
         "  movq %%mm0, 0(%2)\n"
         "  emms\n"
         : "+r" (s), "+r" (n)
-        : "r" (a));
+        : "r" (a)
+        : "memory");
 
     sum += a[0];
     sum += a[1];
