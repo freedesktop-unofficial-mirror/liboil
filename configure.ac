@@ -187,7 +187,10 @@ if test x$HAVE_GCC_ASM = xyes -a x$HAVE_POWERPC = xyes ; then
     true)
 fi
 
-if test x$HAVE_GCC_ASM = xyes -a x$HAVE_ARM = xyes ; then
+AC_ARG_ENABLE(vfp,
+  AC_HELP_STRING([--enable-vfp],[compile with Vector Floating-point unit support]),
+  enable_vfp=$enableval,enable_vfp=yes)
+if test "x$enable-vfp" = xyes -a x$HAVE_GCC_ASM = xyes -a x$HAVE_ARM = xyes; then
   AS_COMPILER_FLAG(["-Wa,-mfpu=vfp"],
     [VFP_CFLAGS="$VFP_CFLAGS -mfpu=vfp"],
     true)
