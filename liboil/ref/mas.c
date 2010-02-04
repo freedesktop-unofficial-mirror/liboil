@@ -218,7 +218,7 @@ mas8_test (OilTest *test)
   int i;
 
   data = (int16_t *)oil_test_get_source_data (test, OIL_ARG_SRC2);
-  for(i=0;i<12;i++){
+  for(i=0;i<8;i++){
     data[i] = taps[i];
   }
 
