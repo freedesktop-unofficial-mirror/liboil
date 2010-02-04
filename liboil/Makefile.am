@@ -39,6 +39,10 @@ if HAVE_POWERPC
 if HAVE_GCC_ASM
 SUBDIRS += powerpc motovec
 libs += powerpc/libpowerpc.la motovec/libmotovec.la
+
+# motovec doesn't compile on snow leopard, and isn't useful elsewhere
+#SUBDIRS += motovec
+#libs += motovec/libmotovec.la
 if HAVE_ASM_BLOCKS
 SUBDIRS += powerpc_asm_blocks
 libs += powerpc/libpowerpc_asm_blocks.la
