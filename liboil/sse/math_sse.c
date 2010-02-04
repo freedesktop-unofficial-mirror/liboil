@@ -353,7 +353,7 @@ scalarmultiply_f64_ns_sse2 (double *dest, double *src1, double *val, int n)
   for (; ((long)dest & 15) && (n > 0); n--) {
     *dest++ = *src1++ * *val;
   }
-  xmm1 = _mm_load_pd1(val);
+  xmm1 = _mm_load1_pd(val);
   for (; n >= 2; n -= 2) {
     __m128d xmm0;
     xmm0 = _mm_loadu_pd(src1);
