@@ -1,4 +1,17 @@
 
+***** WARNING *****
+
+Liboil is now in maintenence-only mode.  No new features will
+be added, and bugs will be fixed according to their severity and
+availablility of patches.
+
+Users of liboil are recommended to switch to Orc
+(http://code.entropywave.com/projects/orc/).  Please contact
+David Schleef <ds@schleef.org> about converting liboil functions
+to Orc code -- in many cases this work has already been done.
+
+***** WARNING *****
+
 
 Requirements
 ============
