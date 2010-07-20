@@ -162,13 +162,10 @@ get_cpuid (uint32_t op, uint32_t *a, uint32_t *b, uint32_t *c, uint32_t *d)
 static void
 get_cpuid (uint32_t op, uint32_t *a, uint32_t *b, uint32_t *c, uint32_t *d)
 {
+  *a = op;
   __asm__ (
-      "  pushq %%rbx\n"
       "  cpuid\n"
-      "  mov %%ebx, %%esi\n"
-      "  popq %%rbx\n"
-      : "=a" (*a), "=S" (*b), "=c" (*c), "=d" (*d)
-      : "0" (op));
+      : "+a" (*a), "=b" (*b), "=c" (*c), "=d" (*d));
 }
 #endif
 
@@ -185,7 +182,7 @@ oil_cpu_detect_cpuid (void)
 {
   uint32_t eax, ebx, ecx, edx;
   uint32_t level;
-  char vendor[13] = { 0 };
+  char vendor[13+4] = { 0 };
   int ret;
 
   oil_fault_check_enable ();
