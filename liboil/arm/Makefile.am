@@ -6,4 +6,5 @@ libarm_la_SOURCES = \
 	math_vfp_asm.S
 
 libarm_la_CFLAGS = $(LIBOIL_CFLAGS) $(VFP_CFLAGS)
+libarm_la_CCASFLAGS = $(LIBOIL_CFLAGS) $(VFP_CFLAGS)
 
